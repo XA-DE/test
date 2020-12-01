@@ -59,7 +59,7 @@ echo "
 ::1		localhost
 127.0.1.1	x.localdomain	x
 " >> /art/etc/hosts &&
-arch-chroot /art systemctl enable NetworkManager
+arch-chroot /art systemctl enable NetworkManager &&
 echo "######################################" &&
 echo "###### fixing SOUND ######" &&
 echo "######################################" &&
