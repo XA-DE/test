@@ -1,3 +1,5 @@
+timedatectl set-ntp true
+reflector -c India -a 12 --sort rate --save /etc/pacman.d/mirrorlist
 echo "######################################" &&
 echo "###### Available disks ######" &&
 echo "######################################" &&
