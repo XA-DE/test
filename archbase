@@ -18,6 +18,7 @@ pacman -S gdisk git --noconfirm
 sgdisk -Z ${DISK} # zap all on disk
 sgdisk -a 2048 -o ${DISK} # new gpt disk 2048 alignment
 
+
 echo "######################################" 
 echo "###### preparing PARTS ######" 
 echo "######################################" 
@@ -56,6 +57,8 @@ echo "######################################"
 arch-chroot /art grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=grub 
 arch-chroot /art grub-mkconfig -o /boot/grub/grub.cfg 
 echo "######################################" 
+
+
 echo "######-- enter root password --######" 
 echo "######################################" 
 arch-chroot /art passwd root 
