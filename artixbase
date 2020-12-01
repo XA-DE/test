@@ -3,7 +3,7 @@ lsblk
 
 
 echo "- enter your disk to format (eg. /dev/sda)-"
-DISK=/dev/sda 
+read DISK 
 
 
 echo "----- preparing disk -------"
