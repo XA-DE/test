@@ -37,7 +37,8 @@ mount "${DISK}1" /art/boot/ &&
 echo "######################################" &&
 echo "###### INSTALLING ARCH ######" &&
 echo "######################################" &&
-pacstrap /art base linux-lts efibootmgr grub networkmanager linux-firmware xf86-video-intel intel-ucode xorg-server xorg-xinit dkms broadcom-wl-dkms alsa-utils crda thunar dmenu polybar feh bspwm vim sxhkd redshift picom alacritty sudo &&
+pacstrap /art base linux-lts efibootmgr grub networkmanager linux-firmware xf86-video-intel intel-ucode xorg-server xorg-xinit dkms broadcom-wl-dkms alsa-utils crda thunar dmenu feh bspwm vim sxhkd redshift picom alacritty sudo &&
+#polybar
 genfstab -U /art >> /art/etc/fstab &&
 echo "######################################" &&
 echo "###### creating BOOTLOADER ######" &&
