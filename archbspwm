@@ -36,34 +36,28 @@ echo "######################################" &&
 echo "###### INSTALLING ARCH ######" &&
 echo "######################################" &&
 pacstrap /art base linux-lts efibootmgr grub networkmanager linux-firmware xf86-video-intel intel-ucode xorg-server xorg-xinit dkms broadcom-wl-dkms alsa-utils crda thunar dmenu polybar feh bspwm vim sxhkd redshift picom alacritty sudo &&
-
-
-fstabgen -U /art >> /art/etc/fstab &&
+genfstab -U /art >> /art/etc/fstab &&
 echo "######################################" &&
 echo "###### creating BOOTLOADER ######" &&
 echo "######################################" &&
-
-#artools-chroot /art grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=grub &&
-#artools-chroot /art grub-mkconfig -o /boot/grub/grub.cfg &&
-
-
+arch-chroot /art grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=grub &&
+arch-chroot /art grub-mkconfig -o /boot/grub/grub.cfg &&
 echo "######################################" &&
 echo "###### BLACKARCH ######" &&
 echo "######################################" &&
-artools-chroot /art curl -O https://blackarch.org/strap.sh &&
-artools-chroot /art sh strap.sh &&
-artools-chroot /art ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime && hwclock --systohc &&
+arch-chroot /art curl -O https://blackarch.org/strap.sh &&
+arch-chroot /art sh strap.sh &&
+arch-chroot /art ln -sf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime && hwclock --systohc &&
 echo "######################################" &&
 echo "###### configuring SYSTEM ######" &&
 echo "######################################" &&
-echo "en_US.UTF-8 UTF-8" >> /art/etc/locale.gen && locale-gen &&
-echo "export LANG="en_US.UTF-8" " >> /art/etc/locale.conf &&
 echo "x" >> /art/etc/hostname &&
 echo "
 127.0.0.1	localhost
 ::1		localhost
 127.0.1.1	x.localdomain	x
 " >> /art/etc/hosts &&
+arch-chroot /art systemctl enable NetworkManager
 echo "######################################" &&
 echo "###### fixing SOUND ######" &&
 echo "######################################" &&
@@ -82,15 +76,15 @@ cp -r add /art/usr/share/fonts/ &&
 echo "######################################" &&
 echo "--- configuring user x --" &&
 echo "######################################" &&
-artools-chroot /art useradd -mG wheel x &&
+arch-chroot /art useradd -mG wheel x &&
 echo "######################################" &&
 echo "######-- enter root password --######" &&
 echo "######################################" &&
-artools-chroot /art passwd root &&
+arch-chroot /art passwd root &&
 echo "######################################" &&
 echo "######-- enter x password --######" &&
 echo "######################################" &&
-artools-chroot /art passwd x &&
+arch-chroot /art passwd x &&
 echo "%wheel ALL=(ALL) NOPASSWD: ALL" >> /art/etc/sudoers &&
 git clone https://github.com/XA-DE/dotfiles.git &&
 cp -r dotfiles/. /art/home/x &&
