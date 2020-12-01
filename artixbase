@@ -1,11 +1,11 @@
-echo "######################################" 
+echo "#############################" 
 echo "###### Available disks ######" 
-echo "######################################" 
-lsblk 
+echo "#############################" 
+lsblk
 
 
 echo "######################################" 
-echo "######-- enter disk to format --######" 
+echo "#### enter disk to format (eg. sda) ####" 
 echo "######################################" 
 read DISK 
 
@@ -15,37 +15,37 @@ echo "###### preparing disk ######"
 echo "######################################" 
 pacman -Syy 
 pacman -S gdisk git --noconfirm 
-sgdisk -Z ${DISK} # zap all on disk
-sgdisk -a 2048 -o ${DISK} # new gpt disk 2048 alignment
+sgdisk -Z /dev/${DISK} # zap all on disk
+sgdisk -a 2048 -o /dev/${DISK} # new gpt disk 2048 alignment
 
 
 echo "######################################" 
 echo "###### preparing PARTS ######" 
 echo "######################################" 
-sgdisk -n 1:0:+200M ${DISK} 
-sgdisk -n 2:0:0 ${DISK}  
-sgdisk -t 1:ef00 ${DISK} 
-sgdisk -t 2:8300 ${DISK} 
+sgdisk -n 1:0:+200M /dev/${DISK} 
+sgdisk -n 2:0:0 /dev/${DISK}  
+sgdisk -t 1:ef00 /dev/${DISK} 
+sgdisk -t 2:8300 /dev/${DISK} 
 
 
 echo "######################################" 
 echo "###### formatting PARTS ######" 
 echo "######################################" 
-mkfs.vfat -F32 "${DISK}1" 
-mkfs.ext4 "${DISK}2" 
+mkfs.vfat -F32 "/dev/${DISK}1" 
+mkfs.ext4 "/dev/${DISK}2" 
 
 
 echo "######################################" 
 echo "###### mounting MOUNTAINS ######" 
 echo "######################################" 
 mkdir /art 
-mount "${DISK}2" /art 
+mount "/dev/${DISK}2" /art 
 mkdir /art/boot 
-mount "${DISK}1" /art/boot/ 
+mount "/dev/${DISK}1" /art/boot/ 
 
 
 echo "######################################" 
-echo "###### INSTALLING ARTIX ######" 
+echo "###### INSTALLING ARCH ######" 
 echo "######################################" 
 basestrap /art elogind-runit base linux-lts linux-firmware efibootmgr grub networkmanager networkmanager-runit
 fstabgen -U /art >> /art/etc/fstab 
