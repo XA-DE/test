@@ -5,7 +5,7 @@ read DISK &&
 echo "----- preparing disk -------" &&
 pacman -Syy &&
 pacman -S reflector gdisk --noconfirm &&
-reflector -c "India" --sort rate --save /etc/pacman.d/mirrorlist &&
+#reflector -c "India" --sort rate --save /etc/pacman.d/mirrorlist &&
 sgdisk -Z ${DISK} && # zap all on disk
 sgdisk -a 2048 -o ${DISK} && # new gpt disk 2048 alignment
 echo "----- preparing PARTS ------" &&
