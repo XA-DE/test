@@ -45,7 +45,7 @@ mount "${DISK}1" /art/boot/
 
 
 echo "######################################" 
-echo "###### INSTALLING ARCH ######" 
+echo "###### INSTALLING ARTIX ######" 
 echo "######################################" 
 basestrap /art elogind-runit base linux-lts linux-firmware efibootmgr grub networkmanager networkmanager-runit
 fstabgen -U /art >> /art/etc/fstab 
