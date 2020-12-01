@@ -1,7 +1,7 @@
 echo "------ Available disks ------" &&
 lsblk &&
 echo "- enter your disk to format (eg. /dev/sda)-" &&
-read DISK &&
+DISK=/dev/sda &&
 echo "----- preparing disk -------" &&
 pacman -Syy &&
 pacman -S gdisk --noconfirm &&
