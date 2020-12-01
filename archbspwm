@@ -1,5 +1,3 @@
-timedatectl set-ntp true
-reflector -c India -a 12 --sort rate --save /etc/pacman.d/mirrorlist
 echo "######################################" &&
 echo "###### Available disks ######" &&
 echo "######################################" &&
@@ -11,6 +9,7 @@ read DISK &&
 echo "######################################" &&
 echo "###### preparing disk ######" &&
 echo "######################################" &&
+reflector -c "India" --sort rate --save /etc/pacman.d/mirrorlist &&
 pacman -Syy &&
 pacman -S gdisk git --noconfirm &&
 sgdisk -Z ${DISK} && # zap all on disk
