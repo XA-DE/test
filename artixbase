@@ -22,7 +22,7 @@ mount "${DISK}2" /art &&
 mkdir /art/boot &&
 mount "${DISK}1" /art/boot/ &&
 echo "------ INSTALLING ARTIX -------" &&
-basestrap /art elogind-runit base linux-lts linux-firmware efibootmgr grub networkmanager networkmanager-runit &&
+basestrap /art elogind-runit base-devel linux-lts linux-firmware efibootmgr grub networkmanager networkmanager-runit &&
 fstabgen -U /art >> /art/etc/fstab &&
 echo "----- creating BOOTLOADER -----" &&
 artools-chroot /art grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=grub &&
