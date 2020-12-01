@@ -4,7 +4,7 @@ echo "#############################"
 lsblk
 
 echo "######################################" 
-echo "#### enter disk to format (eg. sda) ####" 
+echo "### enter disk to format (eg. sda) ###" 
 echo "######################################" 
 read DISK 
 
