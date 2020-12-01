@@ -59,6 +59,7 @@ echo "######################################"
 echo "######-- enter root password --######" 
 echo "######################################" 
 arch-chroot /art passwd root 
+arch-chroot /art systemctl enable NetworkManager
 
 
 echo "######################################" 
