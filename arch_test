@@ -38,6 +38,7 @@ mkfs.ext4 "/dev/${DISK}2"
 echo "------------------------------"
 echo "##### mounting MOUNTAINS #####" 
 echo "------------------------------"
+rm -rf /art
 mkdir /art 
 mount "/dev/${DISK}2" /art 
 mkdir /art/boot 
