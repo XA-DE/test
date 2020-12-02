@@ -4,7 +4,7 @@ after connecting to net
 
 run the following commands
 
-# for ARTIX
+# for ARTIX-runit
     su
     bash <(curl -s https://raw.githubusercontent.com/XA-DE/scripts/main/artixbase)
 
