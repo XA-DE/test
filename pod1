@@ -1,0 +1,17 @@
+#cgroup_no_v1="all" > /etc/default/grub
+# sudo grub-mkconfig -o /boot/grub/grub.cfg
+#reboot
+
+####OR
+
+# mount -t cgroup2 none /sys/fs/cgroup
+#ls /sys/fs/cgroup
+
+
+
+sudo pacman -S --noconfirm podman crun bash-completion
+sudo touch /etc/{subgid,subuid}
+sudo usermod --add-subuids 100000-165535 --add-subgids 100000-165535 x
+podman system migrate
+reboot
+podman search nginx

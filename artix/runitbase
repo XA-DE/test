@@ -38,6 +38,7 @@ mkfs.ext4 "/dev/${DISK}2"
 echo "------------------------------"
 echo "##### mounting MOUNTAINS #####" 
 echo "------------------------------"
+rm -rf /art
 mkdir /art 
 mount "/dev/${DISK}2" /art 
 mkdir /art/boot 
@@ -45,24 +46,23 @@ mount "/dev/${DISK}1" /art/boot/
 
 
 echo "-----------------------------"
-echo "###### INSTALLING ARCH ######" 
+echo "###### INSTALLING ARTIX ######" 
 echo "-----------------------------"
-pacstrap /art base linux-lts linux-firmware efibootmgr grub networkmanager
+basestrap /art base linux-lts efibootmgr grub networkmanager linux-firmware networkmanager-runit elogind-runit
 genfstab -U /art >> /art/etc/fstab 
 
 
 echo "------------------------------"
 echo "##### creating BOOTLOADER ####" 
 echo "------------------------------"
-arch-chroot /art grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=grub 
-arch-chroot /art grub-mkconfig -o /boot/grub/grub.cfg 
+artools-chroot /art grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=grub 
+artools-chroot /art grub-mkconfig -o /boot/grub/grub.cfg 
 
 
 echo "-----------------------------"
 echo "#### enter root password ####" 
 echo "-----------------------------"
-arch-chroot /art passwd root 
-arch-chroot /art systemctl enable NetworkManager
+artools-chroot /art passwd root 
 
 
 echo "-----------------------------"
